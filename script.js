@@ -1,0 +1,1 @@
+//file xử lý chung
