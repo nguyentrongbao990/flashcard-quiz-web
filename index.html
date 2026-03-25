@@ -9,13 +9,64 @@
 </head>
 
 <body>
-    <h1>Flashcard Quiz Web</h1>
-    <p>Dự án giữa kỳ môn thực tập cơ sở</p>
+  <h1>Flashcard Quiz Web</h1>
+  <p>Dự án giữa kỳ môn thực tập cơ sở</p>
 
-    <script src="storage.js"></script>
-    <script src="flashcard.js"></script>
-    <script src="quiz.js"></script>
-    <script src="script.js"></script>
+  <hr>
+
+  <section id="deckSection">
+    <h2>Danh sách bộ flashcard</h2>
+    <div id="deckList"></div>
+
+    <h3>Tạo bộ flashcard mới</h3>
+    <input type="text" id="deckTitle" placeholder="Tên bộ thẻ">
+    <input type="text" id="deckDescription" placeholder="Mô tả bộ thẻ">
+    <button id="createDeckBtn">Tạo bộ thẻ</button>
+  </section>
+
+  <hr>
+
+  <section id="deckDetailSection">
+    <h2>Chi tiết bộ thẻ</h2>
+    <h3 id="deckTitleDisplay"></h3>
+    <p id="deckDescriptionDisplay"></p>
+
+    <ul id="cardList"></ul>
+
+    <h3>Thêm flashcard</h3>
+    <input type="text" id="cardFront" placeholder="Mặt trước">
+    <input type="text" id="cardBack" placeholder="Mặt sau">
+    <button id="addCardBtn">Thêm thẻ</button>
+  </section>
+
+  <hr>
+
+  <section id="studySection">
+    <h2>Học flashcard</h2>
+    <p id="cardCounter"></p>
+    <div id="flashcardDisplay"></div>
+    <button id="flipBtn">Lật thẻ</button>
+    <button id="nextBtn">Tiếp theo</button>
+  </section>
+
+  <hr>
+
+  <section id="quizSection">
+    <h2>Quiz</h2>
+    <div id="quizContainer"></div>
+  </section>
+
+  <hr>
+
+  <section id="resultSection">
+    <h2>Kết quả</h2>
+    <div id="resultContainer"></div>
+  </section>
+
+  <script src="storage.js"></script>
+  <script src="flashcard.js"></script>
+  <script src="quiz.js"></script>
+  <script src="script.js"></script>
 </body>
 
 </html>
