@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Học flashcard</title>
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#2563eb",
+                        bgsoft: "#f4f7ff",
+                        card: "#ffffff",
+                        textmain: "#1f2937",
+                        textsub: "#6b7280",
+                        success: "#15803d",
+                        warning: "#f59e0b",
+                        bordersoft: "#dbe4ff"
+                    },
+                    fontFamily: {
+                        sans: ["Be Vietnam Pro", "sans-serif"]
+                    },
+                    boxShadow: {
+                        soft: "0 10px 30px rgba(37, 99, 235, 0.08)"
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background:
+                radial-gradient(circle at top left, #eaf1ff 0%, transparent 35%),
+                radial-gradient(circle at top right, #eef4ff 0%, transparent 30%),
+                #f4f7ff;
+        }
+    </style>
+</head>
+
+<body class="font-sans text-textmain min-h-screen">
+    <div class="max-w-5xl mx-auto px-4 py-8 md:px-6 md:py-10">
+
+        <!-- Nút quay lại -->
+        <div class="mb-6 flex flex-wrap gap-3">
+            <button id="backToDetailBtn"
+                class="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-medium text-primary shadow-sm ring-1 ring-blue-100 transition hover:bg-blue-50">
+                ← Quay lại chi tiết bộ thẻ
+            </button>
+        </div>
+
+        <!-- Header study -->
+        <section class="mb-8 rounded-3xl bg-white/90 p-6 shadow-soft ring-1 ring-blue-50 md:p-8">
+            <div class="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+                <div class="w-full">
+                    <p class="mb-2 text-sm font-semibold uppercase tracking-[0.18em] text-primary">
+                        Chế độ học flashcard
+                    </p>
+
+                    <h1 id="deckName" class="text-3xl font-extrabold leading-tight md:text-4xl">
+                        English Basic
+                    </h1>
+
+                    <div class="mt-5 flex items-center justify-between text-sm font-semibold text-textsub">
+                        <span id="cardCounter">Thẻ 1 / 4</span>
+                        <span id="progressPercent">25%</span>
+                    </div>
+
+                    <div class="mt-3 h-3 w-full overflow-hidden rounded-full bg-blue-100">
+                        <div id="progressBar" class="h-full rounded-full bg-primary transition-all duration-300"
+                            style="width: 25%;"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Flashcard -->
+        <section class="rounded-3xl bg-white p-6 shadow-soft ring-1 ring-blue-50 md:p-8">
+            <div class="mb-6 text-center">
+                <p class="text-sm font-semibold uppercase tracking-[0.18em] text-textsub">
+                    Flashcard hiện tại
+                </p>
+            </div>
+
+            <div id="flashcardBox"
+                class="mx-auto flex min-h-[280px] max-w-3xl items-center justify-center rounded-[2rem] border border-blue-100 bg-bgsoft px-6 py-10 text-center shadow-sm md:min-h-[360px]">
+                <div>
+                    <p id="cardSideLabel" class="mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-textsub">
+                        Mặt trước
+                    </p>
+
+                    <div id="flashcardText" class="text-2xl font-bold leading-relaxed text-textmain md:text-4xl">
+                        Hello
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nút điều khiển -->
+            <div class="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2">
+                <button id="flipBtn"
+                    class="rounded-full bg-warning px-6 py-4 text-base font-bold text-white shadow-md transition hover:opacity-90">
+                    Lật thẻ
+                </button>
+
+                <button id="nextBtn"
+                    class="rounded-full bg-primary px-6 py-4 text-base font-bold text-white shadow-md transition hover:opacity-90">
+                    Tiếp theo
+                </button>
+            </div>
+
+            <!-- Gợi ý nhỏ -->
+            <div class="mt-8 rounded-2xl bg-blue-50 px-5 py-4 text-sm text-textsub">
+                Mẹo: Hãy đoán nghĩa trước khi bấm <span class="font-semibold text-textmain">Lật thẻ</span> để ghi nhớ
+                tốt hơn.
+            </div>
+        </section>
+    </div>
+
+    <script src="storage.js"></script>
+    <script src="flashcard.js"></script>
+    <!-- Sau này thêm -->
+    <script src="study.js"></script>
+</body>
+
+</html>

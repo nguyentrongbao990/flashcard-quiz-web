@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chi tiết bộ thẻ</title>
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#2563eb",
+                        bgsoft: "#f4f7ff",
+                        card: "#ffffff",
+                        textmain: "#1f2937",
+                        textsub: "#6b7280",
+                        success: "#15803d",
+                        warning: "#f59e0b",
+                        bordersoft: "#dbe4ff"
+                    },
+                    fontFamily: {
+                        sans: ["Be Vietnam Pro", "sans-serif"]
+                    },
+                    boxShadow: {
+                        soft: "0 10px 30px rgba(37, 99, 235, 0.08)"
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background:
+                radial-gradient(circle at top left, #eaf1ff 0%, transparent 35%),
+                radial-gradient(circle at top right, #eef4ff 0%, transparent 30%),
+                #f4f7ff;
+        }
+    </style>
+</head>
+
+<body class="font-sans text-textmain min-h-screen">
+    <div class="max-w-6xl mx-auto px-4 py-8 md:px-6 md:py-10">
+
+        <!-- Nút quay lại -->
+        <div class="mb-6">
+            <button id="backToListBtn"
+                class="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-medium text-primary shadow-sm ring-1 ring-blue-100 transition hover:bg-blue-50">
+                ← Quay lại danh sách bộ thẻ
+            </button>
+        </div>
+
+        <!-- Tiêu đề -->
+        <section class="mb-8 rounded-3xl bg-white/90 p-6 shadow-soft ring-1 ring-blue-50 md:p-8">
+            <div class="flex flex-col gap-5 md:flex-row md:items-start md:justify-between">
+                <div class="max-w-3xl">
+                    <p class="mb-2 text-sm font-semibold uppercase tracking-[0.18em] text-primary">
+                        Chi tiết bộ thẻ
+                    </p>
+
+                    <h1 class="text-3xl font-extrabold leading-tight md:text-5xl">
+                        <span class="text-textmain">Bộ thẻ:</span>
+                        <span id="deckTitleDisplay" class="text-primary">English Basic</span>
+                    </h1>
+
+                    <p id="deckDescriptionDisplay" class="mt-4 text-base leading-7 text-textsub md:text-lg">
+                        Mô tả bộ thẻ sẽ hiển thị ở đây.
+                    </p>
+                </div>
+
+                <div class="flex flex-wrap gap-3 md:justify-end">
+                    <button id="goToStudyBtn"
+                        class="rounded-full bg-warning px-5 py-3 text-sm font-bold text-white shadow-md transition hover:opacity-90">
+                        Học flashcard
+                    </button>
+
+                    <button id="goToQuizBtn"
+                        class="rounded-full bg-success px-5 py-3 text-sm font-bold text-white shadow-md transition hover:opacity-90">
+                        Làm quiz
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Nội dung chính -->
+        <section class="grid grid-cols-1 gap-6 xl:grid-cols-12">
+
+            <!-- Cột trái: thêm flashcard -->
+            <div class="xl:col-span-4">
+                <div class="rounded-3xl bg-white p-6 shadow-soft ring-1 ring-blue-50 md:p-7">
+                    <div class="mb-6">
+                        <h2 class="text-2xl font-bold text-textmain">Thêm flashcard</h2>
+                        <p class="mt-2 text-sm text-textsub">
+                            Nhập nội dung mặt trước và mặt sau để thêm thẻ mới vào bộ thẻ hiện tại.
+                        </p>
+                    </div>
+
+                    <div class="space-y-5">
+                        <div>
+                            <label for="cardFront" class="mb-2 block text-sm font-semibold text-textmain">
+                                Mặt trước
+                            </label>
+                            <textarea id="cardFront" rows="4" placeholder="Ví dụ: apple"
+                                class="w-full rounded-2xl border border-blue-100 bg-bgsoft px-4 py-3 text-sm text-textmain placeholder:text-slate-400 focus:border-primary focus:ring-primary"></textarea>
+                        </div>
+
+                        <div>
+                            <label for="cardBack" class="mb-2 block text-sm font-semibold text-textmain">
+                                Mặt sau
+                            </label>
+                            <textarea id="cardBack" rows="4" placeholder="Ví dụ: quả táo"
+                                class="w-full rounded-2xl border border-blue-100 bg-bgsoft px-4 py-3 text-sm text-textmain placeholder:text-slate-400 focus:border-primary focus:ring-primary"></textarea>
+                        </div>
+
+                        <button id="addCardBtn" type="button"
+                            class="w-full rounded-full bg-success px-5 py-3.5 text-sm font-bold text-white shadow-md transition hover:opacity-90">
+                            Thêm thẻ
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cột phải: danh sách thẻ -->
+            <div class="xl:col-span-8">
+                <div class="rounded-3xl bg-white p-6 shadow-soft ring-1 ring-blue-50 md:p-7">
+                    <div class="mb-6 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+                        <div>
+                            <h2 class="text-2xl font-bold text-textmain">Danh sách thẻ</h2>
+                            <p class="mt-1 text-sm text-textsub">
+                                Các flashcard hiện có trong bộ thẻ này.
+                            </p>
+                        </div>
+
+                        <span id="cardCountBadge"
+                            class="inline-flex w-fit items-center rounded-full bg-blue-100 px-3 py-1 text-sm font-semibold text-primary">
+                            0 thẻ
+                        </span>
+                    </div>
+
+                    <div id="emptyState"
+                        class="hidden rounded-2xl border border-dashed border-blue-200 bg-bgsoft px-6 py-10 text-center text-textsub">
+                        Chưa có flashcard nào trong bộ này.
+                    </div>
+
+                    <div id="cardList" class="grid grid-cols-1 gap-4 md:grid-cols-2">
+                        <!-- JS sẽ render card ở đây -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="storage.js"></script>
+    <script src="flashcard.js"></script>
+    <script src="detail.js"></script>
+    <!-- Sau này thêm -->
+    <!-- <script src="detail.js"></script> -->
+</body>
+
+</html>

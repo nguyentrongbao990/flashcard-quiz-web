@@ -1,4 +1,5 @@
 const STORAGE_KEY = "flashcardDecks";
+const CURRENT_DECK_KEY = "currentDeckId";
 
 function getDecks() {
   const data = localStorage.getItem(STORAGE_KEY);
@@ -38,4 +39,17 @@ function initSampleData() {
 
     saveDecks(sampleDecks);
   }
+}
+
+function setCurrentDeckId(deckId) {
+  localStorage.setItem(CURRENT_DECK_KEY, String(deckId));
+}
+
+function getCurrentDeckId() {
+  const value = localStorage.getItem(CURRENT_DECK_KEY);
+  return value ? Number(value) : null;
+}
+
+function clearCurrentDeckId() {
+  localStorage.removeItem(CURRENT_DECK_KEY);
 }
