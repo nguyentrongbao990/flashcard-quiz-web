@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="base.css">
+    <link rel="stylesheet" href="style-home.css">
+
+    <title>Flashcard Quiz Web</title>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="inner-wrap">
+            <div class="inner-logo">
+                <a href="#">
+                    <img src="../image/logo.png" alt="">
+                    <span>Flashcard Quiz Web</span>
+                </a>
+            </div>
+            <div class="inner-menu">
+                <ul>
+                    <li>
+                        <a href="home.html" target="_blank">Trang Chủ</a>
+                    </li>
+                    <li>
+                        <a href="detail.html" target="_blank">Bộ Bài</a>
+                    </li>
+                    <li>
+                        <a href="study.html" target="_blank">Học Thẻ</a>
+                    </li>
+                    <li>
+                        <a href="quiz.html" target="_blank">Trắc nghiệm</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="inner-option">
+                <a href=""><i class="fa-regular fa-bell"></i></a>
+                <img src="../image/avatar.png" alt="">
+            </div>
+        </div>
+    </header>
+    <!-- End Header -->
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <div class="inner-wrap">
+                <h1 class="inner-title">Flashcard Quiz Web</h1>
+                <p class="inner-desc">Nền tảng học tập thông minh giúp bạn làm chủ mọi kiến thức từ Lập trình, Ngôn ngữ
+                    đến Khoa học thông qua các bộ thẻ tương tác và bài Quiz sinh động. Học mọi lúc, ghi nhớ mọi nơi.</p>
+            </div>
+        </div>
+    </div>
+    <!-- End Hero Section-->
+
+    <!-- Create Deck Section -->
+    <div class="create-deck">
+        <div class="container">
+            <div class="inner-wrap">
+                <div class="inner-head">
+                    <div class="inner-icon">
+                        <i class="fa-solid fa-circle-plus"></i>
+                    </div>
+                    <h2 class="inner-title">Tạo Bộ Bài Mới</h2>
+                </div>
+                <div class="inner-body">
+                    <form action="">
+                        <div class="row">
+                            <div class="col-xl-4">
+                                <div class="form-group">
+                                    <label for="deckTitle">Tên Bộ Bài</label>
+                                    <input type="text" class="form-control" id="deckTitle"
+                                        placeholder="ví dụ: Bộ thẻ IELTS">
+                                </div>
+                            </div>
+                            <!-- form-group: là class để css cho thẻ bọc ngoài (wrapper) các field input, để tạo khoảng cách (margin) giữa các ô nhập -->
+                            <!-- form-control: là class để css cho các field input, để style form, chỉnh border,... -->
+
+                            <div class="col-xl-4">
+                                <!--<div class="form-group">-->
+                                <label for="deckDescription">Mô Tả</label>
+                                <input type="text" class="form-control" id="deckDescription"
+                                    placeholder="Mô tả ngắn gọn cho bộ thẻ">
+                                <!--</div>-->
+                            </div>
+
+                            <div class="col-xl-4 inner-btn">
+                                <!-- Phải thêm class text-center (ứng với css text-align: center;) để button được căn giữa. Vì text-align căn chỉnh cho element con -->
+                                <button class="btn" id="createDeckBtn">Tạo Bộ Thẻ</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Create Deck Section -->
+
+    <!-- Display DeckList -->
+    <div class="display-deckList">
+        <div class="container">
+            <div class="inner-wrap">
+                <div class="inner-head">
+                    <h2 class="inner-title">Danh Sách Bộ Thẻ</h2>
+                </div>
+                <div class="inner-body">
+                    <div class="row" id="deckList"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Display DeckList-->
+
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+        crossorigin="anonymous"></script>
+
+    <script src="storage.js"></script>
+    <script src="flashcard.js"></script>
+    <script src="home.js"></script>
+    <script src="quiz.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

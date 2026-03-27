@@ -1,0 +1,254 @@
+/* Header */
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    background: rgba(230, 231, 234, 0.95);
+    padding: 0 45px;
+}
+
+.header .inner-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header .inner-logo a {
+    display: flex;
+    align-items: center;
+}
+
+.header .inner-logo a {
+    text-decoration: none;
+}
+
+.header .inner-logo a img {
+    width: 35px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.header .inner-logo a span {
+    color: #225BD8;
+    font-size: 24px;
+    font-weight: 800;
+}
+
+.header .inner-menu ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    /* Dùng dev tool thấy css mặc định của thẻ ul có margin */
+}
+
+.header .inner-menu ul li a {
+    display: inline-block;
+    padding: 35px 20px;
+    /*đặt padding cho thẻ a chứ ko phải li để khi nhấp vào khối, đường link sẽ hđ*/
+    font-size: 18px;
+    font-weight: 600px;
+    color: var(--color-text);
+}
+
+.header .inner-menu ul li a:hover {
+    color: #225BD8;
+    text-decoration: none;
+}
+
+.header .inner-option {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.header .inner-option a {
+    font-size: 20px;
+    color: var(--color-text);
+    margin-right: 10px;
+}
+
+.header .inner-option img {
+    width: 45px;
+    height: 45px;
+    border-radius: 100%;
+    cursor: pointer;
+}
+
+.header .inner-option img:hover {
+    border-radius: 1px solid #225BD8;
+}
+/* End Header */
+
+/* Hero Section */
+.hero-section {
+    background: var(--color-bg-1);
+    padding: 30px 0;
+}
+
+.hero-section .inner-wrap { 
+    display: center;
+    text-align: center;
+}
+
+.hero-section .inner-title {
+    font-size: 60px;
+    font-weight: 800;
+    margin: 0;
+    margin-bottom: 20px;
+}
+
+.hero-section .inner-desc {
+    font-size: 18px;
+    color: #555C65;
+    margin: 0;
+}
+/* End Hero Section */ 
+
+/* Create Deck Section */
+.create-deck {
+    background: var(--color-bg-1);
+    padding: 30px 0;
+}
+
+.create-deck .inner-wrap {
+    background: var(--color-bg-2);
+    overflow: hidden;
+    border-radius: 45px;  
+    padding: 40px 45px;
+}
+
+.create-deck .inner-head {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    padding: 20px 0;
+    margin-bottom: 20px;
+}
+
+.create-deck .inner-head .inner-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #6D9FFF;
+    width: 30px;
+    height: 30px;
+    padding: 18px;
+    border-radius: 100%;
+    margin-right: 10px;
+}
+
+.create-deck .inner-head .inner-title {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.create-deck .inner-body #deckDescription {
+    margin-bottom: 25px;
+}
+
+.create-deck .inner-body .inner-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.create-deck .inner-body .btn {
+    background: var(--color-one);
+    width: 100%;
+    color: white;
+    font-weight: 600;
+    border-radius: 45px;
+    padding: 15px;
+}
+
+.create-deck .inner-body .btn:hover {
+    background: #004099;
+}
+
+/* End Create Deck Section */
+
+/* Display DeckList */ 
+.display-deckList {
+    background: var(--color-bg-1);
+    padding: 30px 0;
+}
+
+.display-deckList .inner-head .inner-title {
+    font-weight: 700;
+    margin: 0;
+    margin-bottom: 30px;
+    padding-left: 5px;
+}
+
+.display-deckList .inner-body .inner-item {
+    background: white;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    padding: 30px 25px;
+    border-radius: 40px;
+}
+
+.display-deckList .inner-body .inner-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+}
+
+.display-deckList .inner-item .inner-title {
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0;
+    margin-bottom: 15px;
+}
+
+.display-deckList .inner-item .inner-desc, .inner-figure {
+    color: #6B7280;
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0;
+    margin-bottom: 20px;
+}
+
+.display-deckList .inner-item .inner-btn {
+    display: flex;
+    justify-content: space-between;
+}
+
+.display-deckList .inner-btn .btn {
+    width: calc((100% - 20px) / 3);
+    font-size: 16px;
+    border-radius: 20px;
+    padding: 10px 15px;
+}
+
+.display-deckList .inner-btn .btn-1 {
+    color: #6B7280;
+    border: 1px solid #ddd;
+}
+
+.display-deckList .inner-btn .btn-1:hover {
+    background: #f3f4f6;
+}
+
+.display-deckList .inner-btn .btn-2 {
+    background: var(--color-one);
+    color: white;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.display-deckList .inner-btn .btn-2:hover {
+    background: #004494;
+}
+
+.display-deckList .inner-btn .btn-3 {
+    background: #86FF90;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.display-deckList .inner-btn .btn-3:hover {
+    background: #5ffb7d;
+}
+/* End Display Decklist */ 
