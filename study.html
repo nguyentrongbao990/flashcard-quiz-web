@@ -6,125 +6,117 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Học flashcard</title>
 
-    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet">
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: "#2563eb",
-                        bgsoft: "#f4f7ff",
-                        card: "#ffffff",
-                        textmain: "#1f2937",
-                        textsub: "#6b7280",
-                        success: "#15803d",
-                        warning: "#f59e0b",
-                        bordersoft: "#dbe4ff"
-                    },
-                    fontFamily: {
-                        sans: ["Be Vietnam Pro", "sans-serif"]
-                    },
-                    boxShadow: {
-                        soft: "0 10px 30px rgba(37, 99, 235, 0.08)"
-                    }
-                }
-            }
-        }
-    </script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
         body {
-            background:
-                radial-gradient(circle at top left, #eaf1ff 0%, transparent 35%),
-                radial-gradient(circle at top right, #eef4ff 0%, transparent 30%),
-                #f4f7ff;
+            background: #f4f7ff;
+        }
+
+        .soft-card {
+            border: 1px solid #e5edff;
+            box-shadow: 0 10px 24px rgba(37, 99, 235, 0.08);
+            border-radius: 1.25rem;
+        }
+
+        .page-hero {
+            background: linear-gradient(135deg, #ffffff, #eef4ff);
+            border: 1px solid #dbe7ff;
+        }
+
+        .flashcard-box {
+            min-height: 320px;
+            background: #f8fbff;
+            border: 1px solid #dbe7ff;
+            border-radius: 1.5rem;
+        }
+
+        .text-subtle {
+            color: #6b7280;
+        }
+
+        @media (max-width: 768px) {
+            .flashcard-box {
+                min-height: 240px;
+            }
         }
     </style>
 </head>
 
-<body class="font-sans text-textmain min-h-screen">
+<body>
     <!-- Header -->
     <div id="header-container"></div>
     <!-- End Header -->
 
-    <div class="max-w-5xl mx-auto px-4 py-8 md:px-6 md:py-10">
+    <div class="container py-5">
 
         <!-- Nút quay lại -->
-        <div class="mb-6 flex flex-wrap gap-3">
-            <button id="backToDetailBtn"
-                class="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-medium text-primary shadow-sm ring-1 ring-blue-100 transition hover:bg-blue-50">
+        <div class="mb-4">
+            <button id="backToDetailBtn" class="btn btn-outline-primary rounded-pill px-4">
                 ← Quay lại chi tiết bộ thẻ
             </button>
         </div>
 
         <!-- Header study -->
-        <section class="mb-8 rounded-3xl bg-white/90 p-6 shadow-soft ring-1 ring-blue-50 md:p-8">
-            <div class="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
-                <div class="w-full">
-                    <p class="mb-2 text-sm font-semibold uppercase tracking-[0.18em] text-primary">
-                        Chế độ học flashcard
-                    </p>
+        <section class="page-hero soft-card p-4 p-md-5 mb-4">
+            <div class="w-100">
+                <p class="text-uppercase fw-semibold text-primary small mb-2">
+                    Chế độ học flashcard
+                </p>
 
-                    <h1 id="deckName" class="text-3xl font-extrabold leading-tight md:text-4xl">
-                        English Basic
-                    </h1>
+                <h1 id="deckName" class="fw-bold mb-4">
+                    English Basic
+                </h1>
 
-                    <div class="mt-5 flex items-center justify-between text-sm font-semibold text-textsub">
-                        <span id="cardCounter">Thẻ 1 / 4</span>
-                        <span id="progressPercent">25%</span>
-                    </div>
+                <div class="d-flex justify-content-between align-items-center text-subtle fw-semibold mb-2">
+                    <span id="cardCounter">Thẻ 1 / 4</span>
+                    <span id="progressPercent">25%</span>
+                </div>
 
-                    <div class="mt-3 h-3 w-full overflow-hidden rounded-full bg-blue-100">
-                        <div id="progressBar" class="h-full rounded-full bg-primary transition-all duration-300"
-                            style="width: 25%;"></div>
-                    </div>
+                <div class="progress" style="height: 12px; border-radius: 999px;">
+                    <div id="progressBar" class="progress-bar bg-primary" role="progressbar" style="width: 25%;"></div>
                 </div>
             </div>
         </section>
 
         <!-- Flashcard -->
-        <section class="rounded-3xl bg-white p-6 shadow-soft ring-1 ring-blue-50 md:p-8">
-            <div class="mb-6 text-center">
-                <p class="text-sm font-semibold uppercase tracking-[0.18em] text-textsub">
+        <section class="soft-card bg-white p-4 p-md-5">
+            <div class="text-center mb-4">
+                <p class="text-uppercase fw-semibold text-subtle small mb-0">
                     Flashcard hiện tại
                 </p>
             </div>
 
             <div id="flashcardBox"
-                class="mx-auto flex min-h-[280px] max-w-3xl items-center justify-center rounded-[2rem] border border-blue-100 bg-bgsoft px-6 py-10 text-center shadow-sm md:min-h-[360px]">
+                class="flashcard-box d-flex align-items-center justify-content-center text-center px-4 py-5 mx-auto">
                 <div>
-                    <p id="cardSideLabel" class="mb-4 text-sm font-semibold uppercase tracking-[0.18em] text-textsub">
+                    <p id="cardSideLabel" class="text-uppercase fw-semibold text-subtle small mb-3">
                         Mặt trước
                     </p>
 
-                    <div id="flashcardText" class="text-2xl font-bold leading-relaxed text-textmain md:text-4xl">
+                    <div id="flashcardText" class="fw-bold display-6">
                         Hello
                     </div>
                 </div>
             </div>
 
             <!-- Nút điều khiển -->
-            <div class="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2">
-                <button id="flipBtn"
-                    class="rounded-full bg-warning px-6 py-4 text-base font-bold text-white shadow-md transition hover:opacity-90">
-                    Lật thẻ
-                </button>
-
-                <button id="nextBtn"
-                    class="rounded-full bg-primary px-6 py-4 text-base font-bold text-white shadow-md transition hover:opacity-90">
-                    Tiếp theo
-                </button>
+            <div class="row g-3 mt-4">
+                <div class="col-md-6">
+                    <button id="flipBtn" class="btn btn-warning text-white w-100 rounded-pill py-3 fw-semibold">
+                        Lật thẻ
+                    </button>
+                </div>
+                <div class="col-md-6">
+                    <button id="nextBtn" class="btn btn-primary w-100 rounded-pill py-3 fw-semibold">
+                        Tiếp theo
+                    </button>
+                </div>
             </div>
 
-            <!-- Gợi ý nhỏ -->
-            <div class="mt-8 rounded-2xl bg-blue-50 px-5 py-4 text-sm text-textsub">
-                Mẹo: Hãy đoán nghĩa trước khi bấm <span class="font-semibold text-textmain">Lật thẻ</span> để ghi nhớ
-                tốt hơn.
+            <!-- Gợi ý -->
+            <div class="alert alert-primary mt-4 mb-0">
+                Mẹo: Hãy đoán nghĩa trước khi bấm <strong>Lật thẻ</strong> để ghi nhớ tốt hơn.
             </div>
         </section>
     </div>

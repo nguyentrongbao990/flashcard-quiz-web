@@ -76,25 +76,28 @@ function renderDetailPage(deckId) {
     cardList.innerHTML = "";
 
     if (deck.cards.length === 0) {
-        emptyState.classList.remove("hidden");
+        emptyState.classList.remove("d-none");
         return;
     }
 
-    emptyState.classList.add("hidden");
+    emptyState.classList.add("d-none");
 
     deck.cards.forEach(card => {
         const cardItem = document.createElement("div");
-        cardItem.className =
-            "rounded-3xl bg-bgsoft p-5 ring-1 ring-blue-100 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md";
+        cardItem.className = "col-md-6";
 
         cardItem.innerHTML = `
-      <p class="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-textsub">Mặt trước</p>
-      <h3 class="mb-4 text-xl font-bold text-textmain break-words">${escapeHtml(card.front)}</h3>
+      <div class="card h-100 border-0 shadow-sm rounded-4">
+        <div class="card-body p-4">
+          <p class="text-uppercase text-secondary fw-semibold small mb-2">Mặt trước</p>
+          <h3 class="h4 fw-bold mb-4">${escapeHtml(card.front)}</h3>
 
-      <div class="mb-4 h-px bg-blue-100"></div>
+          <hr>
 
-      <p class="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-textsub">Mặt sau</p>
-      <p class="text-base leading-7 text-textsub break-words">${escapeHtml(card.back)}</p>
+          <p class="text-uppercase text-secondary fw-semibold small mb-2">Mặt sau</p>
+          <p class="mb-0 text-muted">${escapeHtml(card.back)}</p>
+        </div>
+      </div>
     `;
 
         cardList.appendChild(cardItem);
