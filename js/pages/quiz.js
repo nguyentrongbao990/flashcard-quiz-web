@@ -1,52 +1,50 @@
 // ==========================================
-// NGƯỜI 3: CODE XỬ LÝ LOGIC QUIZ VÀ KẾT QUẢ
+// CODE XỬ LÝ LOGIC QUIZ VÀ KẾT QUẢ
 // ==========================================
 
 let quizDeck = null;
 let currentQuizIndex = 0;
 let score = 0;
 
-// 1. Hàm bắt đầu Quiz
+/**
+ * 1. Hàm bắt đầu Quiz
+ * Lấy dữ liệu từ storage và khởi tạo trạng thái bài làm
+ */
 function startQuiz() {
-    // Lấy ID bộ thẻ đang chọn (Sử dụng hàm getCurrentDeckId của Người 2 viết trong storage.js)
-    const currentDeckId = getCurrentDeckId();
+    // Lấy ID bộ thẻ đang chọn từ storage (do Người 2 viết)
+    // Nếu storage.js chưa có hàm này, bạn cần đảm bảo nó trả về ID đang lưu
+    const currentDeckId = typeof getCurrentDeckId === 'function' ? getCurrentDeckId() : null;
     
-    // Bắt lỗi: Chưa chọn bộ thẻ
     if (!currentDeckId) {
-        alert("Vui lòng chọn một bộ thẻ trước khi làm quiz!");
+        alert("Không tìm thấy bộ thẻ được chọn. Vui lòng quay lại trang chủ!");
         return;
     }
 
-    // Lấy chi tiết bộ thẻ (Sử dụng hàm getDecks của Người 2)
-    const decks = getDecks();
+    const decks = typeof getDecks === 'function' ? getDecks() : [];
     quizDeck = decks.find(deck => deck.id === Number(currentDeckId));
 
-    if (!quizDeck) return;
-
-    // Bắt lỗi: Bộ thẻ chưa có flashcard nào
-    if (!quizDeck.cards || quizDeck.cards.length === 0) {
-        alert("Bộ thẻ này chưa có flashcard nào. Hãy thêm thẻ trước khi làm Quiz!");
+    if (!quizDeck || !quizDeck.cards || quizDeck.cards.length === 0) {
+        alert("Bộ thẻ này trống hoặc không tồn tại. Hãy thêm thẻ trước!");
         return;
     }
 
-    // Khởi tạo lại các biến trạng thái
+    // Reset trạng thái
     currentQuizIndex = 0;
     score = 0;
 
-    // Gọi hàm hiển thị câu hỏi
     renderQuizQuestion();
 }
 
-// 2. Hàm hiển thị câu hỏi
+/**
+ * 2. Hàm hiển thị câu hỏi (Giao diện thẻ Quiz)
+ */
 function renderQuizQuestion() {
-    // Gọi đúng ID rổ chứa mà Người 1 đã làm trong index.html
     const quizContainer = document.getElementById("quizContainer");
     const resultContainer = document.getElementById("resultContainer");
     
-    // Xóa kết quả cũ nếu có
     if (resultContainer) resultContainer.innerHTML = "";
 
-    // Kiểm tra nếu đã làm hết thẻ thì chuyển sang hiển thị kết quả
+    // Nếu đã hết câu hỏi -> Show kết quả
     if (currentQuizIndex >= quizDeck.cards.length) {
         renderQuizResult();
         return;
@@ -54,24 +52,26 @@ function renderQuizQuestion() {
 
     const currentCard = quizDeck.cards[currentQuizIndex];
 
-    // Vẽ giao diện Quiz (Sử dụng các class Bootstrap chuẩn của Người 1)
     quizContainer.innerHTML = `
-        <div class="card border-primary">
-            <div class="card-header bg-primary text-white d-flex justify-content-between">
-                <span>Bộ thẻ: <strong>${quizDeck.title}</strong></span>
-                <span>Câu ${currentQuizIndex + 1} / ${quizDeck.cards.length}</span>
+        <div class="card border-primary shadow">
+            <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center py-3">
+                <span class="fw-bold">Học phần: ${quizDeck.title}</span>
+                <span class="badge bg-white text-primary fs-6">${currentQuizIndex + 1} / ${quizDeck.cards.length}</span>
             </div>
             <div class="card-body text-center py-5">
-                <h3 class="card-title mb-4 display-6">${currentCard.front}</h3>
+                <p class="text-muted small mb-2 text-uppercase fw-bold">Mặt trước (Câu hỏi)</p>
+                <h2 class="card-title mb-5 display-5">${currentCard.front}</h2>
                 
                 <div class="row justify-content-center">
-                    <div class="col-md-8">
-                        <input type="text" id="quizAnswer" class="form-control form-control-lg mb-3 text-center" 
-                               placeholder="Nhập đáp án (mặt sau) vào đây..." 
+                    <div class="col-11 col-md-10">
+                        <input type="text" id="quizAnswer" 
+                               class="form-control form-control-lg mb-3 text-center border-2" 
+                               placeholder="Nhập mặt sau của thẻ..." 
+                               autocomplete="off"
                                onkeypress="handleEnterPress(event)">
                         
-                        <button class="btn btn-primary btn-lg w-100" onclick="submitQuizAnswer()">
-                            Nộp câu trả lời
+                        <button class="btn btn-primary btn-lg w-100 shadow-sm" onclick="submitQuizAnswer()">
+                            Gửi đáp án
                         </button>
                     </div>
                 </div>
@@ -79,73 +79,85 @@ function renderQuizQuestion() {
         </div>
     `;
 
-    // Tự động focus con trỏ chuột vào ô nhập liệu để người dùng gõ luôn
+    // Tự động nhảy con trỏ vào ô nhập
     setTimeout(() => {
-        document.getElementById("quizAnswer").focus();
+        const input = document.getElementById("quizAnswer");
+        if(input) input.focus();
     }, 100);
 }
 
-// 3. Hàm xử lý nộp câu trả lời
+/**
+ * 3. Xử lý chấm điểm
+ */
 function submitQuizAnswer() {
     const answerInput = document.getElementById("quizAnswer");
-    
-    // Bắt lỗi: So sánh hoa/thường (Xóa khoảng trắng 2 đầu và chuyển về chữ thường)
+    if (!answerInput) return;
+
     const userAnswer = answerInput.value.trim().toLowerCase();
     const correctAnswer = quizDeck.cards[currentQuizIndex].back.trim().toLowerCase();
 
-    // Bắt lỗi: Để trống đáp án
     if (userAnswer === "") {
-        alert("Bạn chưa nhập đáp án kìa!");
+        alert("Vui lòng không để trống đáp án!");
         return;
     }
 
-    // Chấm điểm
     if (userAnswer === correctAnswer) {
         score++;
+        // Tùy chọn: Thêm hiệu ứng âm thanh hoặc màu sắc ở đây
     } else {
-        // Có thể alert cho họ biết đáp án đúng (tùy chọn)
-        alert(`Sai rồi! Đáp án đúng là: "${quizDeck.cards[currentQuizIndex].back}"`);
+        alert(`Chưa chính xác!\n- Bạn nhập: ${userAnswer}\n- Đáp án đúng: ${quizDeck.cards[currentQuizIndex].back}`);
     }
 
-    // Chuyển sang câu tiếp theo
     currentQuizIndex++;
     renderQuizQuestion();
 }
 
-// Hàm hỗ trợ: Cho phép ấn phím Enter để nộp bài
+/**
+ * Hỗ trợ phím tắt
+ */
 function handleEnterPress(event) {
     if (event.key === "Enter") {
         submitQuizAnswer();
     }
 }
 
-// 4. Hàm hiển thị kết quả cuối cùng
+/**
+ * 4. Hiển thị tổng kết
+ */
 function renderQuizResult() {
     const quizContainer = document.getElementById("quizContainer");
     const resultContainer = document.getElementById("resultContainer");
 
-    // Ẩn vùng làm quiz đi
-    quizContainer.innerHTML = "";
+    quizContainer.innerHTML = ""; // Xóa khung làm bài
 
     const total = quizDeck.cards.length;
-    const wrong = total - score;
     const percent = Math.round((score / total) * 100);
 
-    // Dựa vào điểm để đưa ra lời chúc
-    let feedback = "";
-    if (percent === 100) feedback = "Tuyệt vời! Bạn đúng tất cả!";
-    else if (percent >= 50) feedback = "Khá lắm! Cố gắng phát huy nhé.";
-    else feedback = "Bạn cần ôn tập lại bộ thẻ này nhiều hơn!";
+    let themeClass = "alert-warning";
+    let message = "Cần cố gắng hơn nữa!";
 
-    // Vẽ giao diện kết quả (Có làm thêm nút Làm lại Quiz như yêu cầu mở rộng)
+    if (percent === 100) {
+        themeClass = "alert-success";
+        message = "Xuất sắc! Bạn đã nhớ toàn bộ bộ thẻ.";
+    } else if (percent >= 50) {
+        themeClass = "alert-info";
+        message = "Khá tốt! Một chút nữa là hoàn hảo.";
+    }
+
     resultContainer.innerHTML = `
-        <div class="alert ${percent >= 50 ? 'alert-success' : 'alert-warning'} text-center py-4">
-            <h4 class="alert-heading fw-bold mb-3">Kết quả Quiz</h4>
-            <h1 class="display-1 fw-bold mb-3">${score}/${total}</h1>
-            <p class="fs-5 mb-2">Tỷ lệ chính xác: <strong>${percent}%</strong></p>
-            <p class="mb-4">${feedback}</p>
-            <hr>
-            <button class="btn btn-outline-dark mt-2 px-4" onclick="startQuiz()">🔄 Làm lại Quiz này</button>
+        <div class="alert ${themeClass} text-center shadow-lg border-0 py-5">
+            <h4 class="alert-heading fw-bold mb-4">KẾT QUẢ BÀI QUIZ</h4>
+            <div class="mb-4">
+                <span class="display-1 fw-bold">${score}</span>
+                <span class="fs-2 text-muted"> / ${total}</span>
+            </div>
+            <p class="fs-4 mb-2">Độ chính xác: <strong>${percent}%</strong></p>
+            <p class="mb-4 italic">${message}</p>
+            <hr class="my-4">
+            <div class="d-grid gap-2 d-md-block">
+                <button class="btn btn-dark btn-lg px-4 me-md-2" onclick="startQuiz()">Làm lại</button>
+                <a href="index.html" class="btn btn-outline-dark btn-lg px-4">Về trang chủ</a>
+            </div>
         </div>
     `;
 }
