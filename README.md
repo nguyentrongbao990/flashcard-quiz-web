@@ -61,7 +61,7 @@ flashcard-quiz-web/
 │
 ├── .gitignore
 └── README.md
-
+```
 ## Chức năng từng phần
 1. Trang chủ (pages/home.html)
 Hiển thị danh sách các bộ thẻ
