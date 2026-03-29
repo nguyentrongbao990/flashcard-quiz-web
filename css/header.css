@@ -1,0 +1,81 @@
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    background: rgba(230, 231, 234, 0.95);
+    padding: 0 45px;
+}
+
+.header .inner-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header .inner-logo a {
+    display: flex;
+    align-items: center;
+}
+
+.header .inner-logo a {
+    text-decoration: none;
+}
+
+.header .inner-logo a img {
+    width: 35px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.header .inner-logo a span {
+    color: #225BD8;
+    font-size: 24px;
+    font-weight: 800;
+}
+
+.header .inner-menu ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    /* Dùng dev tool thấy css mặc định của thẻ ul có margin */
+}
+
+.header .inner-menu ul li a {
+    display: inline-block;
+    padding: 35px 20px;
+    font-size: 18px;
+    font-weight: 600px;
+    color: var(--color-text);
+}
+
+.header .inner-menu ul li a:hover {
+    color: #225BD8;
+    text-decoration: none;
+}
+
+.header .inner-option {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.header .inner-option a {
+    font-size: 20px;
+    color: var(--color-text);
+    margin-right: 10px;
+}
+
+.header .inner-option img {
+    width: 45px;
+    height: 45px;
+    border-radius: 100%;
+    cursor: pointer;
+}
+
+.header .inner-option img:hover {
+    border-radius: 1px solid #225BD8;
+}
