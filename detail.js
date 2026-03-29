@@ -3,13 +3,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const currentDeckId = getCurrentDeckId();
     if (!currentDeckId) {
-        window.location.href = "index.html";
+        window.location.href = "home.html";
         return;
     }
 
     const deck = getDeckById(currentDeckId);
     if (!deck) {
-        window.location.href = "index.html";
+        window.location.href = "home.html";
         return;
     }
 

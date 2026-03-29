@@ -7,8 +7,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let currentDeckId = getCurrentDeckId();
     if (!currentDeckId) {
-        currentDeckId = 1;
-        setCurrentDeckId(currentDeckId);
+        window.location.href = "home.html";
+        return;
     }
 
     const deck = getDeckById(currentDeckId);
