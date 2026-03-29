@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
     renderDetailPage(currentDeckId);
 
     backToListBtn.addEventListener("click", function () {
-        window.location.href = "index.html";
+        window.location.href = "home.html";
     });
 
     goToStudyBtn.addEventListener("click", function () {

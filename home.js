@@ -1,57 +1,57 @@
 document.addEventListener("DOMContentLoaded", function () {
-  initSampleData();
-  renderDeckList();
+	initSampleData();
+	renderDeckList();
 
-  const createDeckBtn = document.getElementById("createDeckBtn");
+	const createDeckBtn = document.getElementById("createDeckBtn");
 
-  createDeckBtn.addEventListener("click", function () {
-    const titleInput = document.getElementById("deckTitle");
-    const descriptionInput = document.getElementById("deckDescription");
+	createDeckBtn.addEventListener("click", function () {
+		const titleInput = document.getElementById("deckTitle");
+		const descriptionInput = document.getElementById("deckDescription");
 
-    const title = titleInput.value.trim();
-    const description = descriptionInput.value.trim();
+		const title = titleInput.value.trim();
+		const description = descriptionInput.value.trim();
 
-    if (!title) {
-      alert("Vui lòng nhập tên bộ thẻ");
-      return;
-    }
+		if (!title) {
+			alert("Vui lòng nhập tên bộ thẻ");
+			return;
+		}
 
-    createDeck(title, description);
-    renderDeckList();
+		createDeck(title, description);
+		renderDeckList();
 
-    titleInput.value = "";
-    descriptionInput.value = "";
-  });
+		titleInput.value = "";
+		descriptionInput.value = "";
+	});
 
 });
 
 let currentDeckId = null;
 
 function createDeck(title, description) {
-  const decks = getDecks();
+	const decks = getDecks();
 
-  const newDeck = {
-    id: Date.now(),
-    title: title,
-    description: description,
-    cards: []
-  };
+	const newDeck = {
+		id: Date.now(),
+		title: title,
+		description: description,
+		cards: []
+	};
 
-  decks.push(newDeck);
-  saveDecks(decks);
+	decks.push(newDeck);
+	saveDecks(decks);
 }
 
 function renderDeckList() {
-  const decks = getDecks();
-  const deckList = document.getElementById("deckList");
+	const decks = getDecks();
+	const deckList = document.getElementById("deckList");
 
-  deckList.innerHTML = "";
+	deckList.innerHTML = "";
 
-  decks.forEach(deck => {
-    const deckCard = document.createElement("div");
-    deckCard.className = "col-xl-4 col-md-6 mb-4";
+	decks.forEach(deck => {
+		const deckCard = document.createElement("div");
+		deckCard.className = "col-xl-4 col-md-6 mb-4";
 
-    deckCard.innerHTML = `
+		deckCard.innerHTML = `
             <div class="inner-item">
                 <h3 class="inner-title">${deck.title}</h3>
 
@@ -65,35 +65,47 @@ function renderDeckList() {
                 </div>
 
                 <div class="inner-btn">
-                    <button class="btn btn-1" onclick="renderDeckDetail(${deck.id})">Chi tiết</button>
+                    <button class="btn btn-1" onclick="goToDetail(${deck.id})">Chi tiết</button>
                     <button class="btn btn-2" onclick="startStudyMode(${deck.id})">Học</button>
-                    <button class="btn btn-3" onclick="startQuiz(${deck.id})">Câu đố</button>
+                    <button class="btn btn-3" onclick="startQuizMode(${deck.id})">Câu đố</button>
                 </div>
             </div>
         `;
 
-    deckList.appendChild(deckCard);
-  });
+		deckList.appendChild(deckCard);
+	});
 }
 
 function getDeckById(deckId) {
-  const decks = getDecks();
-  return decks.find(deck => deck.id === Number(deckId));
+	const decks = getDecks();
+	return decks.find(deck => deck.id === Number(deckId));
+}
+
+function goToDetail(deckId) {
+	setCurrentDeckId(deckId);
+	window.location.href = "detail.html";
 }
 
 function startStudyMode(deckId) {
-  const deck = getDeckById(deckId);
+	const deck = getDeckById(deckId);
+	// Nếu bộ thẻ rỗng thì không chuyển trang học thẻ
+	if (!deck || deck.cards.length === 0) {
+		alert("Bộ thẻ này chưa có flashcard");
+		return;
+	}
 
-  if (!deck) return;
+	setCurrentDeckId(deckId);
+	window.location.href = "study.html";
+}
 
-  if (deck.cards.length === 0) {
-    alert("Bộ thẻ này chưa có flashcard");
-    return;
-  }
+function startQuizMode(deckId) {
+	const deck = getDeckById(deckId);
+	// Nếu bộ thẻ rỗng thì không chuyển trang câu đố
+	if (!deck || deck.cards.length === 0) {
+		alert("Bộ thẻ này chưa có flashcard");
+		return;
+	}
 
-  studyDeck = deck;
-  currentCardIndex = 0;
-  isFlipped = false;
-
-  renderCurrentCard();
+	setCurrentDeckId(deckId);
+	window.location.href = "quiz.html";
 }
