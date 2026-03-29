@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Chi tiết bộ thẻ</title>
 
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-  >
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
     body {
       background: #f4f7ff;
@@ -106,22 +104,12 @@
 
           <div class="mb-3">
             <label for="cardFront" class="form-label fw-semibold">Mặt trước</label>
-            <textarea
-              id="cardFront"
-              rows="4"
-              class="form-control input-soft"
-              placeholder="Ví dụ: apple"
-            ></textarea>
+            <textarea id="cardFront" rows="4" class="form-control input-soft" placeholder="Ví dụ: apple"></textarea>
           </div>
 
           <div class="mb-4">
             <label for="cardBack" class="form-label fw-semibold">Mặt sau</label>
-            <textarea
-              id="cardBack"
-              rows="4"
-              class="form-control input-soft"
-              placeholder="Ví dụ: quả táo"
-            ></textarea>
+            <textarea id="cardBack" rows="4" class="form-control input-soft" placeholder="Ví dụ: quả táo"></textarea>
           </div>
 
           <button id="addCardBtn" type="button" class="btn btn-success w-100 rounded-pill py-3 fw-semibold">
@@ -144,10 +132,7 @@
             </span>
           </div>
 
-          <div
-            id="emptyState"
-            class="alert alert-light border text-center text-subtle d-none"
-          >
+          <div id="emptyState" class="alert alert-light border text-center text-subtle d-none">
             Chưa có flashcard nào trong bộ này.
           </div>
 
@@ -159,9 +144,10 @@
     </div>
   </div>
 
-  <script src="storage.js"></script>
-  <script src="flashcard.js"></script>
-  <script src="detail.js"></script>
-  <script src="import-header.js"></script>
+  <script src="../js/core/storage.js"></script>
+  <script src="../js/core/flashcard.js"></script>
+  <script src="../js/pages/detail.js"></script>
+  <script src="../js/shared/import-header.js"></script>
 </body>
+
 </html>
