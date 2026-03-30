@@ -1,7 +1,7 @@
 const STORAGE_KEY = "flashcardDecks";
 const CURRENT_DECK_KEY = "currentDeckId";
 
-function getDecks() {
+function getDecks() { //đọc dữ liệu từ localStorage
   const data = localStorage.getItem(STORAGE_KEY);
   return data ? JSON.parse(data) : [];
 }
@@ -10,6 +10,7 @@ function saveDecks(decks) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(decks));
 }
 
+//Tạo dữ liệu mẫu nếu chưa có dữ liệu trong localStorage
 function initSampleData() {
   const decks = getDecks();
 
@@ -41,15 +42,16 @@ function initSampleData() {
   }
 }
 
-function setCurrentDeckId(deckId) {
+function setCurrentDeckId(deckId) { //Lưu id của deck hiện tại
   localStorage.setItem(CURRENT_DECK_KEY, String(deckId));
 }
 
-function getCurrentDeckId() {
+function getCurrentDeckId() { //đọc id deck hiện tại
   const value = localStorage.getItem(CURRENT_DECK_KEY);
   return value ? Number(value) : null;
 }
 
+// xóa deck hiện tại khỏi localStorage
 function clearCurrentDeckId() {
   localStorage.removeItem(CURRENT_DECK_KEY);
 }

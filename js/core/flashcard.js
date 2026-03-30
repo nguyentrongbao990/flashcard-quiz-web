@@ -1,4 +1,4 @@
-function createDeck(title, description) {
+function createDeck(title, description) { //tạo deck
   const decks = getDecks();
 
   const newDeck = {
