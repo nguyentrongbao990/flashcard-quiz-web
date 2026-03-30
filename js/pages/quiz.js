@@ -156,7 +156,7 @@ function renderQuizResult() {
             <hr class="my-4">
             <div class="d-grid gap-2 d-md-block">
                 <button class="btn btn-dark btn-lg px-4 me-md-2" onclick="startQuiz()">Làm lại</button>
-                <a href="index.html" class="btn btn-outline-dark btn-lg px-4">Về trang chủ</a>
+                <a href="home.html" class="btn btn-outline-dark btn-lg px-4">Về trang chủ</a>
             </div>
         </div>
     `;
